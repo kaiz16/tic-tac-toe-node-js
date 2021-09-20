@@ -97,6 +97,14 @@ class Game extends Board{
         this.gameBoard[pos] = mark
     }
 
+    // Sleep for given milliseconds
+    sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+          currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
     play(){
         // play the game until there's a draw or a win
         while (this.hasWon() === false || this.isDraw() === false){
@@ -110,10 +118,7 @@ class Game extends Board{
                     this.markPlace(pos, player.symbol)
                     
                 }
-                let delay = 1000000000;
-                while (delay > 0) {
-                    delay--;
-                }
+                this.sleep(2000);
                 this.resetScreen();
                 this.printBoard();
                 if (this.hasWon()){
